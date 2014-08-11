@@ -1,0 +1,19 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meteor Help - Ratings and reviews for every Meteor JS course, post, article, tutorial, and video out there!</title>
+</head>
+
+<body></body>
+
+<template name="layout">
+  {{> header}}
+
+  <div class="alerts">
+    {{> bootstrapAlerts}}
+  </div>
+
+  <div class="container-fluid content-area">
+    {{> yield}}
+  </div>
+</template>
