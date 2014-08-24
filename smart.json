@@ -4,6 +4,8 @@
     "bootstrap-3": {},
     "accounts-ui-bootstrap-3": {},
     "collection2": {},
-    "bootstrap-alerts": {}
+    "bootstrap-alerts": {},
+    "moment": {},
+    "collection-helpers": {}
   }
 }

@@ -12,3 +12,5 @@ accounts-ui-bootstrap-3
 collection2
 accounts-github
 bootstrap-alerts
+moment
+collection-helpers

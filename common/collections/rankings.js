@@ -14,7 +14,7 @@ Schema.Ranking = new SimpleSchema({
   linkId: {
     type: String
   },
-  rating: {
+  value: {
     type: Number,
     allowedValues: [1,2,3,4,5]
   },
@@ -30,9 +30,30 @@ Schema.Ranking = new SimpleSchema({
       }
     }
   },
+  updatedAt: {
+    type: Number,
+    autoValue: function() {
+      if (this.isUpdate) {
+        return +moment();
+      }
+    },
+    denyInsert: true,
+    optional: true
+  },
   active: {
-    type: Boolean
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return true;
+      }
+    }
   }
 });
 
 Rankings.attachSchema(Schema.Ranking);
+
+Rankings.helpers({
+  link: function() {
+    return Links.findOne(this.linkId)
+  }
+});
