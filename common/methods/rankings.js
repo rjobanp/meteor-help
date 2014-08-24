@@ -1,7 +1,7 @@
 userRankingForLink = function(type, userId, linkId) {
   return Rankings.findOne({
     userId: userId,
-    type: type
+    type: type,
     linkId: linkId,
     active: true
   });
@@ -30,7 +30,7 @@ updateRanking = function(params) {
   }
 };
 
-Meteor.methods(function() {
+Meteor.methods({
   insertRating: function(params) {
     params.userId = Meteor.userId();
     params.type = 'rating';

@@ -54,7 +54,7 @@ Schema.Link = new SimpleSchema({
     type: [String]
   },
   claimedOwnerIds: {
-    type: [String]
+    type: [String],
     autoValue: function() {
       if (this.isInsert) {
         return [];
@@ -105,7 +105,7 @@ Schema.Link = new SimpleSchema({
   },
   tags: {
     type: [String],
-    allowedValues: ['paid', 'video']
+    allowedValues: ['paid', 'video'],
     optional: true
   },
   rating: {
@@ -136,5 +136,11 @@ Links.helpers({
       linkId: this._id,
       active: true
     });
+  },
+  linkOwner: function(userId) {
+    return this.ownerIds.indexOf(userId) > -1;
+  },
+  claimedLinkOwner: function(userId) {
+    return this.claimedOwnerIds.indexOf(userId) > -1;
   }
 });

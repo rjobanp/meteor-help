@@ -82,14 +82,35 @@ addLinkOwner = function(linkId, ownerId) {
   });
 };
 
+removeLink = function(link) {
+  if (typeof link !== 'object') {
+    link = Links.findOne(link);
+  }
+
+  return Links.update(link._id, {
+    $set: {
+      active: false
+    }
+  });
+}
+
 Meteor.methods({
   insertLink: function(params) {
-    params.ownerIds = [Meteor.userId()];
+    if ( !Meteor.user().admin ) {
+      params.ownerIds = [Meteor.userId()];
+    }
 
     return Meteor.user() && Links.insert(params);
   },
-  adminInsertLink: function(params) {
-    return Meteor.user() && Meteor.user().admin && Links.insert(params);
+  updateLink: function(linkId, params) {
+    var link = Links.findOne(linkId);
+
+    return link && Meteor.user() && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && Links.update(linkId, params);
+  },
+  removeLink: function(linkId) {
+    var link = Links.findOne(linkId);
+
+    return link && Meteor.user() && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && removeLink(link);
   },
   claimLinkOwner: function(linkId) {
     return Meteor.user() && claimLinkOwner(linkId, Meteor.userId());
