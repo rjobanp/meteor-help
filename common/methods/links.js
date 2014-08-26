@@ -105,12 +105,12 @@ Meteor.methods({
   updateLink: function(linkId, params) {
     var link = Links.findOne(linkId);
 
-    return link && Meteor.user() && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && Links.update(linkId, params);
+    return Meteor.user() && link && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && Links.update(linkId, params);
   },
   removeLink: function(linkId) {
     var link = Links.findOne(linkId);
 
-    return link && Meteor.user() && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && removeLink(link);
+    return Meteor.user() && link && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && removeLink(link);
   },
   claimLinkOwner: function(linkId) {
     return Meteor.user() && claimLinkOwner(linkId, Meteor.userId());

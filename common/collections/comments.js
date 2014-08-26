@@ -71,9 +71,9 @@ Comments.attachSchema(Schema.Comment);
 
 Comments.helpers({
   link: function() {
-    return Links.findOne(this.linkId)
+    return Links.findOne(this.linkId);
   },
-  user: function() {
-    return Meteor.users.findOne(this.userId)
+  commentOwner: function(userId) {
+    return userId === this.userId;
   }
 });
