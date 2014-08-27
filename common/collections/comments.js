@@ -5,20 +5,29 @@ if (typeof Schema === 'undefined')
 
 Schema.userInfo = new SimpleSchema({
   name: {
-    type: String
+    type: String,
+    autoValue: function() {
+      return Meteor.users().profile.name;
+    }
   },
   avatarUrl: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    optional: true
+    autoValue: function() {
+      return "https://avatars.githubusercontent.com/u/" + Meteor.user().services.github.id;
+    }
   },
   githubUsername: {
     type: String,
-    optional: true
+    autoValue: function() {
+      return Meteor.users().services.github.username;
+    }
   },
   emailMd5: {
     type: String,
-    optional: true
+    autoValue: function() {
+      return md5(Meteor.users().services.github.email);
+    }
   }
 });
 

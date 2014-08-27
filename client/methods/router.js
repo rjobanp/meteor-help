@@ -1,4 +1,5 @@
 GlobalSubs = [
+  Meteor.subscribe('userData'),
   Meteor.subscribe('userLinks'),
   Meteor.subscribe('userRankings')
 ];
