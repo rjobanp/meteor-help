@@ -37,9 +37,33 @@ Schema.RankObject = new SimpleSchema({
   }
 });
 
+createSlugFromName = function(name) {
+  var slug = URLify(name);
+
+  while ( Links.findOne({slug: slug}) ) {
+    slug = slug + String(Math.round(Math.random()*100));
+  }
+
+  return slug;
+}
+
 Schema.Link = new SimpleSchema({
   name: {
     type: String
+  },
+  slug: {
+    type: String,
+    autoValue: function() {
+      var name = this.field("name");
+      if (name.isSet) {
+        if (this.isInsert) {
+          return createSlugFromName(name.value);
+        } else {
+          this.unset();
+        }
+      } else {
+        this.unset();
+      }
   },
   types: {
     type: [String],

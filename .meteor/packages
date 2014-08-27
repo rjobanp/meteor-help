@@ -13,4 +13,5 @@ dburles:collection-helpers
 mrt:moment
 accounts-ui
 github
+mrt:urlify
 

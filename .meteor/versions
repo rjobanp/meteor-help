@@ -41,6 +41,7 @@ mongo-livedata@1.0.3
 mrt:bootstrap-3@0.1.0
 mrt:bootstrap-alerts@0.0.5
 mrt:moment@2.8.1
+mrt:urlify@0.1.0
 oauth2@1.0.0
 oauth@1.0.0
 observe-sequence@1.0.1

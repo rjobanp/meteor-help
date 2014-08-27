@@ -12,6 +12,14 @@ Meteor.publish('userLinks', function() {
 Meteor.publish('allLinks', function(params) {
   params = params || {};
 
+  var findQuery = {
+    active: true
+  };
+
+  if ( params.types ) {
+    findQuery.types = { $in: params.types };
+  }
+
   var findOptions = {
     sort: params.sort || [["rating.average", "desc"], ["rating.count", "desc"], ["difficulty.average", "asc"],
     limit: params.limit || 100,
@@ -20,10 +28,16 @@ Meteor.publish('allLinks', function(params) {
     }
   };
 
-  if ( params.skip )
+  if ( params.skip ) {
     findOptions.skip = params.skip;
+  }
 
+  return Links.find(findQuery, findOptions);
+});
+
+Meteor.publish('linkBySlug', function(slug) {
   return Links.find({
+    slug: slug,
     active: true
-  }, findOptions);
+  });
 });
