@@ -1,0 +1,18 @@
+<template name="newLink">
+  <div class="row">
+    <div class="col-sm-12">
+      {{#autoForm collection="Links" id="newLinkForm" type="method" meteormethod="insertLink"}}
+        <fieldset>
+          <legend>Add Content</legend>
+          {{> afQuickField name='name'}}
+          {{> afQuickField name='url'}}
+          {{> afQuickField name='description' rows=6}}
+          {{> afQuickField name='images.profile'}}
+          {{> afQuickField name='types'}}
+          {{> afQuickField name='tags'}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Add</button>
+      {{/autoForm}}
+    </div>
+  </div>
+</template>

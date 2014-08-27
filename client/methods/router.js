@@ -42,4 +42,15 @@ Router.map(function() {
     }
   });
 
+  this.route('newLink', {
+    path: '/new',
+    template: 'newLink',
+    onBeforeAction: function() {
+      // if ( !Meteor.user() ) {
+      //   Router.go('home');
+      //   Alerts.add('You must be logged in to add a new link');
+      // }
+    }
+  });
+
 });

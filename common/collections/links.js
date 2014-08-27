@@ -38,7 +38,7 @@ Schema.RankObject = new SimpleSchema({
 });
 
 createSlugFromName = function(name) {
-  var slug = URLify(name);
+  var slug = Urlify(name);
 
   while ( Links.findOne({slug: slug}) ) {
     slug = slug + String(Math.round(Math.random()*100));
@@ -64,18 +64,20 @@ Schema.Link = new SimpleSchema({
       } else {
         this.unset();
       }
+    }
   },
   types: {
     type: [String],
     allowedValues: ['article', 'website', 'video', 'wiki', 'styleguide', 'blog', 'tutorial', 'series', 'course'],
-    optional: true
+    minCount: 1
   },
   url: {
     type: String,
     regEx: SimpleSchema.RegEx.Url
   },
   ownerIds: {
-    type: [String]
+    type: [String],
+    optional: true
   },
   claimedOwnerIds: {
     type: [String],
@@ -161,10 +163,10 @@ Links.helpers({
       active: true
     });
   },
-  linkOwner: function(userId) {
-    return this.ownerIds.indexOf(userId) > -1;
+  linkOwner: function(user) {
+    return user && this.ownerIds.indexOf(user._id) > -1;
   },
-  claimedLinkOwner: function(userId) {
-    return this.claimedOwnerIds.indexOf(userId) > -1;
+  claimedLinkOwner: function(user) {
+    return user && this.claimedOwnerIds.indexOf(user._id) > -1;
   }
 });

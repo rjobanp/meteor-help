@@ -21,7 +21,7 @@ Meteor.publish('allLinks', function(params) {
   }
 
   var findOptions = {
-    sort: params.sort || [["rating.average", "desc"], ["rating.count", "desc"], ["difficulty.average", "asc"],
+    sort: params.sort || [["rating.average", "desc"], ["rating.count", "desc"], ["difficulty.average", "asc"]],
     limit: params.limit || 100,
     fields: {
       claimedOwnerIds: 0

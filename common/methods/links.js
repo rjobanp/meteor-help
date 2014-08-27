@@ -82,6 +82,16 @@ addLinkOwner = function(linkId, ownerId) {
   });
 };
 
+insertLink = function(params) {
+  // check that link doesn't already exist
+
+  if ( Links.findOne({url: params.url}) ) {
+    return false;
+  }
+  
+  return Links.insert(params);
+}
+
 removeLink = function(link) {
   if (typeof link !== 'object') {
     link = Links.findOne(link);
@@ -100,7 +110,7 @@ Meteor.methods({
       params.ownerIds = [Meteor.userId()];
     }
 
-    return Meteor.user() && Links.insert(params);
+    return Meteor.user() && insertLink(params);
   },
   updateLink: function(linkId, params) {
     var link = Links.findOne(linkId);
