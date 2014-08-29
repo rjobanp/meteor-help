@@ -1,0 +1,22 @@
+<template name="sidebar">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      {{#if currentUser}}
+        <a class="logout-button">Logout {{currentUser.profile.name}}</a>
+      {{else}}
+        <a class="login-github-button">Login with Github</a>
+      {{/if}}
+    </div>
+    <div class="list-group">
+      <a class="list-group-item home-button {{route 'home'}}">Home</a>
+      <a class="list-group-item {{route 'articles'}}">Articles</a>
+      <a class="list-group-item {{route 'courses'}}">Courses</a>
+      <a class="list-group-item {{route 'blogs'}}">Blogs</a>
+      <a class="list-group-item {{route 'tutorials'}}">Tutorials</a>
+      <a class="list-group-item {{route 'videos'}}">Videos</a>
+      <a class="list-group-item {{route 'styleguides'}}">Styleguides</a>
+      <a class="list-group-item {{route 'wikis'}}">Wikis</a>
+      <a class="list-group-item new-link-button {{route 'newLink'}}">+ Add Content</a>
+    </div>
+  </div>
+</template>

@@ -14,6 +14,19 @@
   </div>
 
   <div class="container-fluid content-area">
-    {{> yield}}
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        {{> sidebar}}
+      </div>
+      <div class="col-xs-12 col-sm-10">
+        <p class="visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        {{> yield}}
+      </div>
+    </div>
   </div>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </template>

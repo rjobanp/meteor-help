@@ -1,5 +1,18 @@
 <template name="home">
   <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron">
+        <h1>Guide your Meteor journey</h1>
+        <h3>
+          Meteor Help is a catalog of content from the best in the Meteor and Javascript community
+        </h3>
+      </div>
+    </div>
+  </div>
 
+  <div class="row">
+    {{#each links}}
+      {{> link}}
+    {{/each}}
   </div>
 </template>

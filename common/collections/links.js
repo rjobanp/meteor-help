@@ -131,7 +131,7 @@ Schema.Link = new SimpleSchema({
   },
   tags: {
     type: [String],
-    allowedValues: ['paid', 'video'],
+    allowedValues: ['paid-content', 'video-content'],
     optional: true
   },
   rating: {

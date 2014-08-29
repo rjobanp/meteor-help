@@ -1,27 +1,24 @@
 <template name="linkPage">
   <div class="row">
-    <div class="col-sm-12 link-types">
-      {{#each types}}
-        <button type="button" class="btn btn-sm btn-primary" disabled="disabled">{{this}}</button>
-      {{/each}}
-    </div>
-  </div>
-  <div class="row">
     <div class="col-sm-12 link-name">
       {{#if images.profile}}
         <img class="img-responsive" src="{{images.profile}}">
       {{/if}}
       <h1>{{name}}</h1>
+      <br>
+      {{#each types}}
+        <span class="label label-primary">{{this}}</span>
+      {{/each}}
     </div>
     <div class="col-sm-12 link-url">
       <h3><a href="{{url}}" target="_blank">{{url}}</a></h3>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 col-md-6 link-rating">
+    <div class="col-xs-12 col-sm-6 link-rating">
       {{> linkRating this}}
     </div>
-    <div class="col-sm-12 col-md-6 link-difficulty">
+    <div class="col-xs-12 col-sm-6 link-difficulty">
       {{> linkDifficulty this}}
     </div>
   </div>
@@ -31,6 +28,13 @@
         {{> UI.dynamic template=this}}
       </div>
     {{/each}}
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p class="lead">
+        {{description}}
+      </p>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-8">
