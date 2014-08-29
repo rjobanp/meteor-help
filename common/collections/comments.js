@@ -1,7 +1,16 @@
 Comments = new Meteor.Collection('comments');
 
-if (typeof Schema === 'undefined')
+if (typeof Schema === 'undefined') {
   Schema = {};
+}
+
+Meteor.startup(function() {
+  if ( Meteor.isServer ) {
+    Comments._ensureIndex({linkId: 1});
+    Comments._ensureIndex({userId: 1});
+    Comments._ensureIndex({linkId: 1, createdAt: -1});
+  }
+});
 
 Schema.userInfo = new SimpleSchema({
   name: {

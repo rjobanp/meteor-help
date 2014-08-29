@@ -1,7 +1,22 @@
 Links = new Meteor.Collection('links');
 
-if (typeof Schema === 'undefined')
+if (typeof Schema === 'undefined') {
   Schema = {};
+}
+
+Meteor.startup(function() {
+  if ( Meteor.isServer ) {
+    Links._ensureIndex({slug: 1});
+    Links._ensureIndex({types: 1});
+    Links._ensureIndex({types: 1, 'rating.average': -1});
+    Links._ensureIndex({types: 1, 'rating.count': -1});
+    Links._ensureIndex({types: 1, 'difficulty.average': -1});
+    Links._ensureIndex({'rating.average': -1});
+    Links._ensureIndex({'rating.count': -1});
+    Links._ensureIndex({'difficulty.average': 1});
+    Links._ensureIndex({createdAt: -1});
+  }
+});
 
 Schema.ImageObject = new SimpleSchema({
   profile: {

@@ -1,7 +1,15 @@
 Rankings = new Meteor.Collection('rankings');
 
-if (typeof Schema === 'undefined')
+if (typeof Schema === 'undefined') {
   Schema = {};
+}
+
+Meteor.startup(function() {
+  if ( Meteor.isServer ) {
+    Rankings._ensureIndex({linkId: 1});
+    Rankings._ensureIndex({userId: 1});
+  }
+});
 
 Schema.Ranking = new SimpleSchema({
   userId: {
