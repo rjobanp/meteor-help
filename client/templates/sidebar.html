@@ -1,13 +1,11 @@
 <template name="sidebar">
   <div class="panel panel-info">
-    <div class="panel-heading">
-      {{#if currentUser}}
-        <a class="logout-button">Logout {{currentUser.profile.name}}</a>
-      {{else}}
-        <a class="login-github-button">Login with Github</a>
-      {{/if}}
-    </div>
     <div class="list-group">
+      {{#if currentUser}}
+        <a class="list-group-item logout-button">Logout {{currentUser.profile.name}}</a>
+      {{else}}
+        <a class="list-group-item login-github-button">Login with Github</a>
+      {{/if}}
       <a class="list-group-item home-button {{route 'home'}}">Home</a>
       <a class="list-group-item {{route 'articles'}}">Articles</a>
       <a class="list-group-item {{route 'courses'}}">Courses</a>

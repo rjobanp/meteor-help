@@ -1,0 +1,28 @@
+@import "variables.lessimport";
+
+body {
+  background-color: lighten(@brand-primary, 15%);
+  padding-bottom: 15px;
+}
+
+.content-area {
+  width: 100%;
+  padding: 0 30px;
+}
+.alerts {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+  @media (min-width: @screen-sm-min) { 
+    width: 40%;
+  }
+  z-index: 10;
+}
+
+.navbar-form {
+  margin-left: 0;
+  margin-right: 0
+}
