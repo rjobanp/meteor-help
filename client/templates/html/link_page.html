@@ -1,0 +1,53 @@
+<template name="linkPage">
+  <div class="panel link-page">
+    <div class="row">
+      <div class="col-sm-12 link-name">
+        {{#if images.profile}}
+          <img class="img-responsive" src="{{images.profile}}">
+        {{/if}}
+        <h1>{{name}}</h1>
+        <br>
+        {{#each types}}
+          <span class="label label-primary">{{this}}</span>
+        {{/each}}
+      </div>
+      <div class="col-sm-12 link-url">
+        <h3><a href="{{url}}" target="_blank">{{url}}</a></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        {{> stars rating}}
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        {{> difficulty difficulty}}
+      </div>
+    </div>
+    <div class="row">
+      {{#each tags}}
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+          {{> UI.dynamic template=this}}
+        </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="lead">
+          {{description}}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        {{> commentForm this}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        {{#each comments}}
+          {{> comment}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

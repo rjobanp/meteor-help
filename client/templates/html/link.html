@@ -1,0 +1,16 @@
+<template name="link">
+  <div class="col-xs-12 col-sm-4 col-md-3">
+    <div class="panel panel-default link">
+      <h3>{{name}}</h3>
+      <div class="tags clearfix">
+        {{#each tags}}
+          <div class="tag">
+            {{> UI.dynamic template=this}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="rank-row">{{> stars rating}}</div>
+      <div class="rank-row">{{> difficulty difficulty}}</div>
+    </div>
+  </div>
+</template>
