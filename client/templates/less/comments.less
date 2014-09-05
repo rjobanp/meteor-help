@@ -1,0 +1,46 @@
+@import "variables.lessimport";
+
+.comment {
+  
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid @brand-primary;
+  border-radius: @border-radius-base;
+  min-height: 110px;
+
+  .avatar {
+    max-width: 90px;
+    float: left;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .text {
+    margin-left: 95px;
+    display: block;
+    padding: 0 10px;
+    font-size: 18px;
+
+    .comment-info {
+      font-size: 22px;
+      width: 100%;
+
+      .right-text {
+        font-size: 14px;
+        @media (min-width: @screen-sm-min) { 
+          float: right;
+          display: inline;
+        }
+      }
+    }
+
+    .edit-comment-text {
+      width: 100%;
+    }
+
+  }
+
+  
+}

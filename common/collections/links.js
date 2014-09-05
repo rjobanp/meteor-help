@@ -166,10 +166,15 @@ Links.helpers({
   userDifficulty: function() {
     return userRankingForLink('difficulty', Meteor.userId(), this._id);
   },
+  userComments: function() {
+    return userCommentsForLink(Meteor.userId(), this._id);
+  },
   comments: function() {
     return Comments.find({
       linkId: this._id,
       active: true
+    }, {
+      sort: [['createdAt', "desc"]]
     });
   },
   rankings: function() {

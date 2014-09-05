@@ -16,7 +16,7 @@ Schema.userInfo = new SimpleSchema({
   name: {
     type: String,
     autoValue: function() {
-      return Meteor.users().profile.name;
+      return Meteor.user().profile.name;
     }
   },
   avatarUrl: {
@@ -29,20 +29,23 @@ Schema.userInfo = new SimpleSchema({
   githubUsername: {
     type: String,
     autoValue: function() {
-      return Meteor.users().services.github.username;
+      return Meteor.user().services.github.username;
     }
   },
   emailMd5: {
     type: String,
     autoValue: function() {
-      return md5(Meteor.users().services.github.email);
+      return md5(Meteor.user().services.github.email);
     }
   }
 });
 
 Schema.Comment = new SimpleSchema({
   userId: {
-    type: String
+    type: String,
+    autoValue: function() {
+      return Meteor.userId();
+    }
   },
   userInfo: {
     type: Schema.userInfo
@@ -51,7 +54,8 @@ Schema.Comment = new SimpleSchema({
     type: String
   },
   comment: {
-    type: String
+    type: String,
+    label: "My Review"
   },
   createdAt: {
     type: Number,
@@ -93,5 +97,8 @@ Comments.helpers({
   },
   commentOwner: function(userId) {
     return userId === this.userId;
+  },
+  createdAtFormatted: function() {
+    return moment(this.createdAt).fromNow();
   }
 });

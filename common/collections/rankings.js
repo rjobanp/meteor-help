@@ -13,7 +13,10 @@ Meteor.startup(function() {
 
 Schema.Ranking = new SimpleSchema({
   userId: {
-    type: String
+    type: String,
+    autoValue: function() {
+      return Meteor.userId();
+    }
   },
   type: {
     type: String,

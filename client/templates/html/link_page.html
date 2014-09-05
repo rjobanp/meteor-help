@@ -37,11 +37,13 @@
         </p>
       </div>
     </div>
+    {{#unless userComments.count}}
     <div class="row">
       <div class="col-sm-12 col-md-8">
         {{> commentForm this}}
       </div>
     </div>
+    {{/unless}}
     <div class="row">
       <div class="col-sm-12 col-md-8">
         {{#each comments}}

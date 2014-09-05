@@ -40,6 +40,11 @@ Router.map(function() {
     },
     data: function() {
       return Links.findOne({slug: this.params.slug})
+    },
+    onBeforeAction: function() {
+      if ( this.ready() ) {
+        Meteor.subscribe('linkComments', this.data()._id);
+      }
     }
   });
 

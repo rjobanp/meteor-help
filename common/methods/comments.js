@@ -1,3 +1,11 @@
+userCommentsForLink = function(userId, linkId) {
+  return Comments.find({
+    userId: userId,
+    linkId: linkId,
+    active: true
+  });
+};
+
 removeComment = function(comment) {
   if (typeof comment !== 'object') {
     comment = Comments.findOne(comment);
@@ -13,7 +21,6 @@ removeComment = function(comment) {
 Meteor.methods({
   insertComment: function(params) {
     params.userId = Meteor.userId();
-    // params.userInfo = getUserInfo(Meteor.user());
 
     var link = params.linkId && Links.findOne(params.linkId);
     return Meteor.user() && link && Comments.insert(params);

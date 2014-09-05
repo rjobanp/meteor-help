@@ -2,11 +2,38 @@
   {{#autoForm collection="Comments" id="newCommentForm" type="method" meteormethod="insertComment"}}
     <fieldset>
       {{> afQuickField name='comment' rows=3}}
+      {{> afFieldInput name='linkId' type='hidden' value=_id}}
     </fieldset>
-    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="submit" class="btn btn-primary">Post Review</button>
   {{/autoForm}}
 </template>
 
 <template name="comment">
-
+  <div class="comment">
+    <div class="avatar">
+      <img src="{{userInfo.avatarUrl}}">
+    </div>
+    <div class="text">
+      <div class="comment-info">
+        <a href="http://github.com/{{userInfo.githubUsername}}" target="_blank">{{userInfo.name}}</a>
+        <div class="right-text">
+          {{#if currentUser}}
+            {{#if commentOwner currentUser._id}}
+              {{#unless editing}}
+                <button class="btn btn-xs btn-danger remove-comment">Remove</button>&nbsp; &nbsp;
+                <button class="btn btn-xs btn-warning edit-comment">Edit</button>&nbsp; &nbsp;
+              {{/unless}}
+            {{/if}}
+          {{/if}}
+          {{createdAtFormatted}}
+        </div>
+      </div>
+      {{#if editing}}
+        <textarea value="{{comment}}" class="edit-comment-text" rows="3"></textarea>
+      {{else}}
+        <p>{{comment}}</p>
+      {{/if}}
+    </div>
+    <div class="clearfix"></div>
+  </div>
 </template>
