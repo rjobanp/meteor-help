@@ -1,4 +1,4 @@
-Links = new Meteor.Collection('links');
+Links = new Mongo.Collection('links');
 
 if (typeof Schema === 'undefined') {
   Schema = {};

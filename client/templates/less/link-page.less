@@ -1,5 +1,32 @@
 @import "variables.lessimport";
 
+.tag {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 10px;
+
+  .text {
+    display: none;
+  }
+}
+
 .link-page {
   padding: 15px;
+
+  .tag {
+    margin-left: 0;
+    margin-right: 15px;
+    font-size: 22px;
+
+    .text {
+      display: inline-block;
+      font-size: 18px;
+    }
+  }
+
+  .ranking-form select {
+    max-width: 100px;
+    display: inline-block;
+  }
 }

@@ -5,7 +5,7 @@
         {{#if images.profile}}
           <img class="img-responsive" src="{{images.profile}}">
         {{/if}}
-        <h1>{{name}}</h1>
+        <h1><a href="{{url}}" target="_blank">{{name}}</a></h1>
         <br>
         {{#each types}}
           <span class="label label-primary">{{this}}</span>
@@ -15,37 +15,63 @@
         <h3><a href="{{url}}" target="_blank">{{url}}</a></h3>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        {{> stars rating}}
+    <div class="row bottom-space">
+      <div class="col-xs-12 col-sm-6 top-space">
+        {{> stars rating}}<br>
+        {{rating.count}} people rated
+
+        {{#if currentUser}}
+          <div class="ranking-form top-space">
+            {{#if userRating}}
+              {{> ratingUpdateForm this}}
+            {{else}}
+              {{> ratingForm this}}
+            {{/if}}
+          </div>
+        {{/if}}
       </div>
-      <div class="col-xs-12 col-sm-6">
-        {{> difficulty difficulty}}
+      <div class="col-xs-12 col-sm-6 top-space">
+        {{> difficulty difficulty}}<br>
+        {{difficulty.count}} people ranked difficulty
+
+        {{#if currentUser}}
+          <div class="ranking-form top-space">
+            {{#if userDifficulty}}
+              {{> difficultyUpdateForm this}}
+            {{else}}
+              {{> difficultyForm this}}
+            {{/if}}
+          </div>
+        {{/if}}
       </div>
     </div>
-    <div class="row">
-      {{#each tags}}
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+    <div class="row top-space bottom-space">
+      <div class="col-xs-12">
+        {{#each tags}}
           {{> UI.dynamic template=this}}
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
     </div>
-    <div class="row">
+    <div class="row top-space bottom-space">
       <div class="col-sm-12">
+        <h3>Description</h3>
         <p class="lead">
           {{description}}
         </p>
       </div>
     </div>
-    {{#unless userComments.count}}
+    {{#if currentUser}}
+      {{#unless userComments.count}}
+        <div class="row top-space">
+          <div class="col-sm-12 col-md-8">
+            {{> commentForm this}}
+          </div>
+        </div>
+      {{/unless}}
+    {{/if}}
     <div class="row">
       <div class="col-sm-12 col-md-8">
-        {{> commentForm this}}
-      </div>
-    </div>
-    {{/unless}}
-    <div class="row">
-      <div class="col-sm-12 col-md-8">
+        <h3>Reviews</h3>
         {{#each comments}}
           {{> comment}}
         {{/each}}

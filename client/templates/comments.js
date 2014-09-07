@@ -1,10 +1,10 @@
 Template.comment.created = function() {
-  this.editing = new Blaze.ReactiveVar(false);
+  this.editing = new ReactiveVar(false);
 }
 
 Template.comment.helpers({
   editing: function() {
-    return UI._templateInstance().editing.get()
+    return Template.instance().editing.get()
   }
 });
 

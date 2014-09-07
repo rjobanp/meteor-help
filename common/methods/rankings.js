@@ -21,37 +21,23 @@ insertRanking = function(params) {
 updateRanking = function(params) {
   var ranking = userRankingForLink(params.type, params.userId, params.linkId);
   if ( ranking ) {
-    var rankingId = Rankings.update(ranking._id, {$set: {value: params.newVal}});
+    var rankingId = Rankings.update(ranking._id, {$set: {value: params.value}});
 
     if ( rankingId ) {
-      updateLinkRanking(ranking.linkId, ranking.type, ranking.value, params.newVal);
+      updateLinkRanking(ranking.linkId, ranking.type, ranking.value, params.value);
       return rankingId;
     }
   }
 };
 
 Meteor.methods({
-  insertRating: function(params) {
+  insertRanking: function(params) {
     params.userId = Meteor.userId();
-    params.type = 'rating';
 
     return Meteor.user() && insertRanking(params);
   },
-  insertDifficultyRanking: function(params) {
+  updateRanking: function(params) {
     params.userId = Meteor.userId();
-    params.type = 'difficulty';
-
-    return Meteor.user() && insertRanking(params);
-  },
-  updateRating: function(params) {
-    params.userId = Meteor.userId();
-    params.type = 'rating';
-
-    return Meteor.user() && updateRanking(params);
-  },
-  updateDifficultyRanking: function(params) {
-    params.userId = Meteor.userId();
-    params.type = 'difficulty';
 
     return Meteor.user() && updateRanking(params);
   }

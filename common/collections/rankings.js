@@ -1,4 +1,4 @@
-Rankings = new Meteor.Collection('rankings');
+Rankings = new Mongo.Collection('rankings');
 
 if (typeof Schema === 'undefined') {
   Schema = {};

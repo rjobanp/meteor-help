@@ -9,3 +9,21 @@
     </div>
   </div>
 </template>
+
+<template name="difficultyForm">
+  {{#autoForm collection="Rankings" id="newDifficultyForm" type="method" meteormethod="insertRanking"}}
+    {{> afFieldInput name='value' options='allowed'}}
+    {{> afFieldInput name='linkId' type='hidden' value=_id}}
+    {{> afFieldInput name='type' type='hidden' value='difficulty'}}
+    <button type="submit" class="btn btn-primary">Rank Difficulty</button>
+  {{/autoForm}}
+</template>
+
+<template name="difficultyUpdateForm">
+  {{#autoForm collection="Rankings" id="newDifficultyForm" type="method" meteormethod="updateRanking"}}
+    {{> afFieldInput name='value' options='allowed' value=userDifficulty.value}}
+    {{> afFieldInput name='linkId' type='hidden' value=_id}}
+    {{> afFieldInput name='type' type='hidden' value='difficulty'}}
+    <button type="submit" class="btn btn-primary">Update Difficulty</button>
+  {{/autoForm}}
+</template>

@@ -1,0 +1,32 @@
+<template name="stars">
+  <em>Rating</em>
+  <div class="stars">
+    <div class="star-groups">
+      <div>
+        <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+      </div>
+      <div class="colored" style="width: {{averagePercent}}%">
+        <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="ratingForm">
+  {{#autoForm collection="Rankings" id="newRatingForm" type="method" meteormethod="insertRanking"}}
+    {{> afFieldInput name='value' options='allowed'}}
+    {{> afFieldInput name='linkId' type='hidden' value=_id}}
+    {{> afFieldInput name='type' type='hidden' value='rating'}}
+    <button type="submit" class="btn btn-primary">Rate</button>
+  {{/autoForm}}
+</template>
+
+
+<template name="ratingUpdateForm">
+  {{#autoForm collection="Rankings" id="newRatingForm" type="method" meteormethod="updateRanking"}}
+    {{> afFieldInput name='value' options='allowed' value=userRating.value}}
+    {{> afFieldInput name='linkId' type='hidden' value=_id}}
+    {{> afFieldInput name='type' type='hidden' value='rating'}}
+    <button type="submit" class="btn btn-primary">Update Rating</button>
+  {{/autoForm}}
+</template>
