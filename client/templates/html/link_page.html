@@ -52,14 +52,16 @@
         {{/each}}
       </div>
     </div>
-    <div class="row top-space bottom-space">
-      <div class="col-sm-12">
-        <h3>Description</h3>
-        <p class="lead">
-          {{description}}
-        </p>
+    {{#if description}}
+      <div class="row top-space bottom-space">
+        <div class="col-sm-12">
+          <h3>Description</h3>
+          <p class="lead">
+            {{description}}
+          </p>
+        </div>
       </div>
-    </div>
+    {{/if}}
     {{#if currentUser}}
       {{#unless userComments.count}}
         <div class="row top-space">

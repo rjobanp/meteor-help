@@ -12,22 +12,33 @@ Router.configure({
   }
 });
 
+linkListController = RouteController.extend({
+  onBeforeAction: function () {
+    if ( this.params && this.params.type ) {
+      Session.set('allLinks.types', [this.params.type]);
+    } else {
+      Session.set('allLinks.types', null);
+    }
+  },
+  waitOn: function() {
+    var params = {
+      sort: Session.get('allLinks.sort'),
+      limit: Session.get('allLinks.limit'),
+      skip: Session.get('allLinks.skip'),
+      types: Session.get('allLinks.types')
+    }
+    return [
+      Meteor.subscribe('allLinks', params)
+    ]
+  }
+});
+
 Router.map(function() {
 
   this.route('home', {
     path: '/',
     template: 'home',
-    waitOn: function() {
-      var params = {
-        sort: Session.get('allLinks.sort'),
-        limit: Session.get('allLinks.limit'),
-        skip: Session.get('allLinks.skip'),
-        types: Session.get('allLinks.types')
-      }
-      return [
-        Meteor.subscribe('allLinks', params)
-      ]
-    }
+    controller: linkListController
   });
 
   this.route('link', {
@@ -59,6 +70,12 @@ Router.map(function() {
         this.render();
       }
     }
+  });
+
+  this.route('type', {
+    path: '/t/:type',
+    template: 'home',
+    controller: linkListController
   });
 
 });

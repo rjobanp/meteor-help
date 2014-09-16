@@ -14,17 +14,12 @@ Template.sidebar.events({
         Alerts.add('Sorry! There was an error logging in.');
       }
     });
-  },
-  'click .home-button': function() {
-    Router.go('home');
-  },
-  'click .new-link-button': function() {
-    Router.go('newLink');
   }
 });
 
 Template.sidebar.helpers({
   route: function(routeName) {
-    return (Router.current().route.name === routeName) ? 'active' : ''
+    var path = Router.current().path.split('/');
+    return (path[path.length-1] === routeName) ? 'active' : ''
   }
 });
