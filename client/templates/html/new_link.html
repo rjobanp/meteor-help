@@ -1,6 +1,7 @@
 <template name="newLink">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 panel">
+      <br>
       {{#autoForm collection="Links" id="newLinkForm" type="method" meteormethod="insertLink"}}
         <fieldset>
           <legend>Add Content</legend>
@@ -13,6 +14,7 @@
         </fieldset>
         <button type="submit" class="btn btn-primary">Add</button>
       {{/autoForm}}
+      <br>
     </div>
   </div>
 </template>

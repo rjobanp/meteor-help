@@ -112,10 +112,14 @@ Meteor.methods({
 
     return Meteor.user() && insertLink(params);
   },
-  updateLink: function(linkId, params) {
-    var link = Links.findOne(linkId);
+  updateLink: function(params) {
+    var link = Links.findOne({slug: params.slug});
 
-    return Meteor.user() && link && (link.linkOwner(Meteor.userId()) || Meteor.user().admin) && Links.update(linkId, params);
+    var newParams = {
+      $set: params
+    }
+
+    return Meteor.user() && link && (link.linkOwner(Meteor.user()) || Meteor.user().admin) && Links.update(link._id, newParams);
   },
   removeLink: function(linkId) {
     var link = Links.findOne(linkId);

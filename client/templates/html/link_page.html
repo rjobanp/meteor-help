@@ -83,5 +83,17 @@
         {{/if}}
       </div>
     </div>
+
+    <div class="row top-space">
+      <div class="col-sm-12">
+        {{#if linkOwner currentUser}}
+          <a href="/edit/{{slug}}" class="btn btn-info">Edit this Content</a>
+        {{else}}
+          {{#if currentUser}}
+            <a class="btn btn-info claim-owner">Claim this Content</a>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
   </div>
 </template>

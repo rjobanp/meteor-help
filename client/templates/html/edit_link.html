@@ -1,0 +1,21 @@
+<template name="editLink">
+  <div class="row">
+    <div class="col-sm-12 panel">
+      <br>
+      {{#autoForm collection="Links" id="editLinkForm" type="method" meteormethod="updateLink"}}
+        <fieldset>
+          <legend>Edit Content</legend>
+          {{> afFieldInput name='slug' type='hidden' value=slug}}
+          {{> afQuickField name='name' value=name}}
+          {{> afQuickField name='url' value=url}}
+          {{> afQuickField name='description' rows=4 value=description}}
+
+          {{> afQuickField name='types' value=types}}
+          {{> afQuickField name='tags' value=tags}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Edit</button>
+      {{/autoForm}}
+      <br>
+    </div>
+  </div>
+</template>

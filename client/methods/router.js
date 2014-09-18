@@ -59,6 +59,27 @@ Router.map(function() {
     }
   });
 
+  this.route('editLink', {
+    path: '/edit/:slug',
+    template: 'editLink',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('linkBySlug', this.params.slug)
+      ]
+    },
+    data: function() {
+      return Links.findOne({slug: this.params.slug})
+    },
+    action: function() {
+      if ( !Meteor.user() || !this.data().linkOwner(Meteor.user()) ) {
+        Router.go('home');
+        Alerts.add('Sorry, you can not edit that link');
+      } else {
+        this.render();
+      }
+    }
+  });
+
   this.route('newLink', {
     path: '/new',
     template: 'newLink',
