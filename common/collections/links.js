@@ -184,9 +184,15 @@ Links.helpers({
     });
   },
   linkOwner: function(user) {
+    if ( user === undefined ) {
+      user =  Meteor.user();
+    }
     return user && this.ownerIds.indexOf(user._id) > -1;
   },
   claimedLinkOwner: function(user) {
+    if ( user === undefined ) {
+      user =  Meteor.user();
+    }
     return user && this.claimedOwnerIds.indexOf(user._id) > -1;
   }
 });
