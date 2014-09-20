@@ -20,6 +20,10 @@ Meteor.publish('allLinks', function(params) {
     findQuery.types = { $in: params.types };
   }
 
+  if ( params.nameRegex ) {
+    findQuery.name = { $regex: params.nameRegex, $options: 'i' };
+  }
+
   var findOptions = {
     sort: params.sort || [["rating.average", "desc"], ["rating.count", "desc"], ["difficulty.average", "asc"]],
     limit: params.limit || 100,

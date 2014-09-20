@@ -25,7 +25,8 @@ linkListController = RouteController.extend({
       sort: Session.get('allLinks.sort'),
       limit: Session.get('allLinks.limit'),
       skip: Session.get('allLinks.skip'),
-      types: Session.get('allLinks.types')
+      types: Session.get('allLinks.types'),
+      nameRegex: Session.get('allLinks.nameRegex')
     }
     return [
       Meteor.subscribe('allLinks', params)
@@ -73,7 +74,7 @@ Router.map(function() {
     action: function() {
       if ( !Meteor.user() || !this.data().linkOwner(Meteor.user()) ) {
         Router.go('home');
-        Alerts.add('Sorry, you can not edit that link');
+        Alerts.add('Sorry, you can not edit that content');
       } else {
         this.render();
       }
@@ -86,7 +87,7 @@ Router.map(function() {
     action: function() {
       if ( !Meteor.user() ) {
         Router.go('home');
-        Alerts.add('You must be logged in to add a new link');
+        Alerts.add('You must be logged in to add new content');
       } else {
         this.render();
       }

@@ -8,6 +8,10 @@ Template.home.helpers({
       findQuery.types = { $in: Session.get('allLinks.types') };
     }
 
+    if ( Session.get('allLinks.nameRegex') ) {
+      findQuery.name = { $regex: Session.get('allLinks.nameRegex'), $options: 'i' };
+    }
+
     var findOptions = {
       sort: Session.get('allLinks.sort') || [["rating.average", "desc"], ["rating.count", "desc"], ["difficulty.average", "asc"]],
       limit: Session.get('allLinks.limit') || 100,
@@ -23,16 +27,16 @@ Template.home.helpers({
     return Links.find(findQuery, findOptions);
   },
   showHomeMessage: function() {
-    return Router.current().route.name === 'home' && Template.instance().showHomeMessage.get();
+    return Router.current().route.name === 'home' && Session.get('showHomeMessage');
   }
 });
 
-Template.home.created = function() {
-  this.showHomeMessage = new ReactiveVar(true);
-}
+Meteor.startup(function() {
+  Session.set('showHomeMessage', true);
+});
 
 Template.home.events({
   'click .close': function(e,t) {
-    t.showHomeMessage.set(false);
+    Session.set('showHomeMessage', false);
   }
 });
