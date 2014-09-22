@@ -83,7 +83,7 @@ Schema.Link = new SimpleSchema({
   },
   types: {
     type: [String],
-    allowedValues: ['article', 'website', 'video', 'wiki', 'styleguide', 'blog', 'tutorial', 'series', 'course'],
+    allowedValues: ['article', 'video', 'book', 'wiki', 'blog', 'news', 'tutorial', 'questions', 'course', 'list', 'slides'],
     minCount: 1
   },
   url: {
@@ -146,7 +146,7 @@ Schema.Link = new SimpleSchema({
   },
   tags: {
     type: [String],
-    allowedValues: ['paid-content', 'video-content'],
+    allowedValues: ['paid-content', 'video-content', 'email-list', 'audio-content'],
     optional: true
   },
   rating: {
