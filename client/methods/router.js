@@ -9,6 +9,10 @@ Router.configure({
 
   waitOn: function() {
     return GlobalSubs;
+  },
+
+  onAfterAction: function() {
+    ga('send', 'pageview');
   }
 });
 
