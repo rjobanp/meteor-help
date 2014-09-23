@@ -90,7 +90,11 @@
           <a href="/edit/{{slug}}" class="btn btn-info">Edit this Content</a>
         {{else}}
           {{#if currentUser}}
-            <a class="btn btn-info claim-owner">Claim this Content</a>
+            {{#if claimedLinkOwner}}
+              <em>An admin will review your ownership request.</em>
+            {{else}}
+              <a class="btn btn-info claim-owner">Claim this Content</a>
+            {{/if}}
           {{/if}}
         {{/if}}
       </div>
