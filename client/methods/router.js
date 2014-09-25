@@ -13,6 +13,7 @@ Router.configure({
 
   onAfterAction: function() {
     ga('send', 'pageview');
+    Session.set('sidebar', false);
   }
 });
 
@@ -61,6 +62,9 @@ Router.map(function() {
       if ( this.ready() ) {
         Meteor.subscribe('linkComments', this.data()._id);
       }
+
+      Session.set('allLinks.nameRegex', '');
+      $('.search-input').val('');
     }
   });
 
@@ -95,6 +99,9 @@ Router.map(function() {
       } else {
         this.render();
       }
+
+      Session.set('allLinks.nameRegex', '');
+      $('.search-input').val('');
     }
   });
 

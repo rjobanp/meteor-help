@@ -1,14 +1,56 @@
 @import "variables.lessimport";
 
 body {
-  background-color: darken(@brand-primary, 15%);
+  background-color: darken(#f8f8f8, 1%);
   padding-bottom: 15px;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 #iron-router-progress {
     background-color : @brand-info;
     box-shadow       : 0 0 5px @brand-info;
+}
+#sidebar-toggle {
+  width: 36px;
+  height: 36px;
+  padding: 5px 8px;
+}
+#sidebar-toggle span, #sidebar-toggle span:before, #sidebar-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 3px;
+  width: 20px;
+  background: @gray;
+  position: absolute;
+  display: block;
+  content: '';
+}
+#sidebar-toggle span:before {
+  top: -6px;
+}
+#sidebar-toggle span:after {
+  bottom: -6px; 
+}
+
+#sidebar-toggle span, #sidebar-toggle span:before, #sidebar-toggle span:after {
+  transition: all 500ms ease-in-out;
+}
+#sidebar-toggle.active span {
+  background-color: transparent;
+}
+#sidebar-toggle.active span:before, #sidebar-toggle.active span:after {
+  top: 0;
+}
+#sidebar-toggle.active span:before {
+  transform: rotate(45deg);
+}
+#sidebar-toggle.active span:after {
+  transform: rotate(-45deg);
 }
 
 .panel, .navbar {

@@ -1,5 +1,5 @@
 <template name="sort">
-  <div class="col-xs-12 col-sm-5 white-text bottom-space">
+  <div class="col-xs-12 bottom-space">
     <strong>Sort By</strong>
     &nbsp;&nbsp;
     <div style="display: inline-block;">
@@ -8,8 +8,8 @@
     </div>
     &nbsp;&nbsp;
     <div style="display: inline-block;">
-      <a class="order-by btn btn-sm {{#if orderedBy 'asc'}}btn-info{{else}}btn-default{{/if}}" data-sort="asc">Asc</a>
-      <a class="order-by btn btn-sm {{#if orderedBy 'desc'}}btn-info{{else}}btn-default{{/if}}" data-sort="desc">Desc</a>
+      <a class="order-by btn btn-sm {{#if orderedBy 'asc'}}btn-info{{else}}btn-default{{/if}}" data-sort="asc"><span class="glyphicon glyphicon-chevron-up"></span></a>
+      <a class="order-by btn btn-sm {{#if orderedBy 'desc'}}btn-info{{else}}btn-default{{/if}}" data-sort="desc"><span class="glyphicon glyphicon-chevron-down"></span></a>
     </div>
   </div>
 </template>

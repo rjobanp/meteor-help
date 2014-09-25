@@ -5,7 +5,15 @@
     </div>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control search-input" placeholder="Search">
+        <div class="visible-xs col-xs-2">
+          <button type="button" id="sidebar-toggle" class="btn btn-default {{#if sidebar}}active{{/if}}" data-toggle="offcanvas">
+            <span></span>
+          </button>
+        </div>
+        <div class="col-xs-10">
+          <input type="text" class="form-control search-input" placeholder="Search">
+        </div>
+        <div class="clearfix"></div>
       </div>
     </form>
   </div>

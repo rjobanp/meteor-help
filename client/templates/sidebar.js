@@ -1,3 +1,15 @@
+Session.setDefault('sidebar', false);
+
+Template.layout.events({
+  'click [data-toggle="offcanvas"]': function () {
+    Session.set('sidebar', !Session.get('sidebar'));
+  }
+});
+
+Template.registerHelper('sidebar', function() {
+    return Session.equals('sidebar', true);
+});
+
 Template.sidebar.events({
   'click .logout-button': function() {
     Meteor.logout(function(e) {
