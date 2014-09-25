@@ -6,7 +6,7 @@ Template.linkPage.events({
 });
 
 Template.linkPage.created = function() {
-  document.title = this.data.name + ' - ' + 'Rate and review on Meteor Help';
+  document.title = this.data.name + ' - ' + 'Meteor Help, Ratings and Reviews for Meteor Content';
 }
 
 Template.linkPage.destroyed = function() {

@@ -6,6 +6,7 @@ if (typeof Schema === 'undefined') {
 
 Meteor.startup(function() {
   if ( Meteor.isServer ) {
+    Links._ensureIndex({name: 1});
     Links._ensureIndex({slug: 1});
     Links._ensureIndex({types: 1});
     Links._ensureIndex({types: 1, 'rating.average': -1});
