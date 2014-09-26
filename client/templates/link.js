@@ -24,3 +24,27 @@ Template.linkPage.helpers({
     return encodeURIComponent('Check out "' + this.name + '" on @MeteorHelp !');
   }
 });
+
+Template.registerHelper('tagsOptions', function() {
+  return [
+    {label: 'Paid', value: 'paid-content'},
+    {label: 'Video', value: 'video-content'},
+    {label: 'Email', value: 'email-list'},
+    {label: 'Audio', value: 'audio-content'}
+  ]
+});
+Template.registerHelper('typesOptions', function() {
+  return [
+    {label: 'article', value: 'article'},
+    {label: 'video', value: 'video'},
+    {label: 'book', value: 'book'},
+    {label: 'wiki', value: 'wiki'},
+    {label: 'blog', value: 'blog'},
+    {label: 'news', value: 'news'},
+    {label: 'tutorial', value: 'tutorial'},
+    {label: 'questions', value: 'questions'},
+    {label: 'course', value: 'course'},
+    {label: 'list', value: 'list'},
+    {label: 'slides', value: 'slides'}
+  ]
+});

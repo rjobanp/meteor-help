@@ -9,8 +9,12 @@
           {{> afQuickField name='url'}}
           {{> afQuickField name='description' rows=4}}
 
-          {{> afQuickField name='types'}}
-          {{> afQuickField name='tags'}}
+          <label>Types</label>
+          {{> afFieldInput name='types' noselect=true options=typesOptions}}
+
+          <br>
+          <label>Tags</label>
+          {{> afFieldInput name='tags' noselect=true options=tagsOptions}}
         </fieldset>
         <button type="submit" class="btn btn-primary">Add</button>
       {{/autoForm}}
