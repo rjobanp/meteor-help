@@ -29,6 +29,7 @@ Schema.ImageObject = new SimpleSchema({
 Schema.RankObject = new SimpleSchema({
   average: {
     type: Number,
+    decimal: true,
     autoValue: function() {
       if (this.isInsert) {
         return 0
