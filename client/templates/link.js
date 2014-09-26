@@ -6,11 +6,11 @@ Template.linkPage.events({
 });
 
 Template.linkPage.created = function() {
-  document.title = this.data.name + ' - ' + 'Meteor Help, Ratings and Reviews for Meteor Content';
+  document.title = this.data.name + ' - ' + 'Meteor Help';
 }
 
 Template.linkPage.destroyed = function() {
-  document.title = 'Meteor Help - A catalog of content from the best in the Meteor and Javascript community';
+  document.title = 'Meteor Help';
 }
 
 Template.linkPage.helpers({
