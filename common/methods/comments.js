@@ -23,7 +23,7 @@ Meteor.methods({
     params.userId = Meteor.userId();
 
     var link = params.linkId && Links.findOne(params.linkId);
-    return Meteor.user() && link && Comments.insert(params);
+    return Meteor.user() && link && Comments.insert(params) && incLinkCommentCount(params.linkId);
   },
   updateComment: function(commentId, params) {
     var comment = Comments.findOne(commentId);
@@ -33,6 +33,6 @@ Meteor.methods({
   removeComment: function(commentId) {
     var comment = Comments.findOne(commentId);
 
-    return Meteor.user() && comment && (comment.commentOwner(Meteor.userId()) || Meteor.user().admin) && removeComment(comment);
+    return Meteor.user() && comment && (comment.commentOwner(Meteor.userId()) || Meteor.user().admin) && removeComment(comment) && decLinkCommentCount(comment.linkId);
   }
 });

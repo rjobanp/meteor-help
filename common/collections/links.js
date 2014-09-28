@@ -156,6 +156,14 @@ Schema.Link = new SimpleSchema({
   },
   difficulty: {
     type: Schema.RankObject
+  },
+  commentsCount: {
+    type: Number,
+    autoValue: function() {
+      if (this.isInsert) {
+        return 0;
+      }
+    }
   }
 });
 

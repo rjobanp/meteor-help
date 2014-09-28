@@ -82,6 +82,22 @@ addLinkOwner = function(linkId, ownerId) {
   });
 };
 
+incLinkCommentCount = function(linkId) {
+  return Links.update(linkId, {
+    $inc: {
+      commentsCount: 1
+    }
+  });
+};
+
+decLinkCommentCount = function(linkId) {
+  return Links.update(linkId, {
+    $inc: {
+      commentsCount: -1
+    }
+  });
+};
+
 insertLink = function(params) {
   // check that link doesn't already exist
 
