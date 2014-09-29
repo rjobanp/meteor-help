@@ -1,14 +1,16 @@
-GlobalSubs = [
-  Meteor.subscribe('userData'),
-  Meteor.subscribe('userLinks'),
-  Meteor.subscribe('userRankings')
-];
+GlobalSubs = new SubsManager();
+
+RouterSubs = new SubsManager();
 
 Router.configure({
   layoutTemplate: 'layout',
 
   waitOn: function() {
-    return GlobalSubs;
+    return [
+      GlobalSubs.subscribe('userData'),
+      GlobalSubs.subscribe('userLinks'),
+      GlobalSubs.subscribe('userRankings')
+    ]
   },
 
   onAfterAction: function() {
@@ -34,7 +36,7 @@ linkListController = RouteController.extend({
       nameRegex: Session.get('allLinks.nameRegex')
     }
     return [
-      Meteor.subscribe('allLinks', params)
+      RouterSubs.subscribe('allLinks', params)
     ]
   }
 });
@@ -52,7 +54,7 @@ Router.map(function() {
     template: 'linkPage',
     waitOn: function() {
       return [
-        Meteor.subscribe('linkBySlug', this.params.slug)
+        RouterSubs.subscribe('linkBySlug', this.params.slug)
       ]
     },
     data: function() {
@@ -60,7 +62,7 @@ Router.map(function() {
     },
     onBeforeAction: function() {
       if ( this.ready() ) {
-        Meteor.subscribe('linkComments', this.data()._id);
+        RouterSubs.subscribe('linkComments', this.data()._id);
       }
 
       Session.set('allLinks.nameRegex', '');
@@ -73,7 +75,7 @@ Router.map(function() {
     template: 'editLink',
     waitOn: function() {
       return [
-        Meteor.subscribe('linkBySlug', this.params.slug)
+        RouterSubs.subscribe('linkBySlug', this.params.slug)
       ]
     },
     data: function() {
