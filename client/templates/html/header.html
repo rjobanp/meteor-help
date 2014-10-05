@@ -2,6 +2,13 @@
   <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
       <a class="navbar-brand" href="/"><img src="/images/meteor_help_v1.png" alt="Meteor Help"></a>
+      <div class="visible-xs btn btn-default">
+        {{#if currentUser}}
+          <a class="logout-button">Logout</a>
+        {{else}}
+          <a class="login-github-button">Login <i class="fa fa-github"></i></a>
+        {{/if}}
+      </div>
     </div>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
@@ -16,5 +23,15 @@
         <div class="clearfix"></div>
       </div>
     </form>
+
+    <ul class="hidden-xs nav navbar-nav navbar-right">
+      <li>
+        {{#if currentUser}}
+          <a class="logout-button">Logout {{currentUser.profile.name}}</a>
+        {{else}}
+          <a class="login-github-button">Login with Github <i class="fa fa-github"></i></a>
+        {{/if}}
+      </li>
+    </ul>
   </div>
 </template>
