@@ -126,7 +126,13 @@ Meteor.methods({
       params.ownerIds = [Meteor.userId()];
     }
 
-    return Meteor.user() && insertLink(params);
+    var linkId = Meteor.user() && insertLink(params);
+
+    if ( Meteor.isServer && linkId ) {
+      return setOpenGraphIdForLink(Links.findOne(linkId)) && linkId;
+    } else {
+      return linkId;
+    }
   },
   updateLink: function(params) {
     var link = Links.findOne({slug: params.slug});
@@ -135,7 +141,13 @@ Meteor.methods({
       $set: params
     }
 
-    return Meteor.user() && link && (link.linkOwner(Meteor.user()) || Meteor.user().admin) && Links.update(link._id, newParams);
+    var linkId = Meteor.user() && link && (link.linkOwner(Meteor.user()) || Meteor.user().admin) && Links.update(link._id, newParams);
+  
+    if ( Meteor.isServer && linkId ) {
+      return setOpenGraphIdForLink(Links.findOne(linkId)) && linkId;
+    } else {
+      return linkId;
+    }
   },
   removeLink: function(linkId) {
     var link = Links.findOne(linkId);

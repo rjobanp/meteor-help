@@ -1,5 +1,4 @@
-Template.link.rendered = function() {
-  var self = this;
+insertImageForLink = function(self) {
   if ( self.data.openGraphId ) {
     HTTP.get('https://graph.facebook.com/' + self.data.openGraphId, function(err, res) {
       if ( res && res.data.image ) {
@@ -8,6 +7,14 @@ Template.link.rendered = function() {
       }
     });
   }
+}
+
+Template.link.rendered = function() {
+  insertImageForLink(this);
+}
+
+Template.linkPage.rendered = function() {
+  insertImageForLink(this);
 }
 
 Template.linkPage.events({
