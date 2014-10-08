@@ -10,8 +10,9 @@ a.link-a {
 
 .link {
   padding: 10px;
+  padding-bottom: 30px;
   cursor: pointer;
-  min-height: 280px;
+  min-height: 320px;
 
   img {
     max-width: 100%;
@@ -23,10 +24,17 @@ a.link-a {
     color: @brand-primary;
   }
 
-  .tag {
-    font-size: 18px;
-    padding: 0 5px;
-    float: right;
+  .tags {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    text-align: left;
+
+    .tag {
+      font-size: 18px;
+      padding: 0 5px;
+      margin: 0 5px 5px 0;
+    }
   }
 
   .rank-row {
@@ -37,7 +45,7 @@ a.link-a {
 
   .comments {
     position: absolute;
-    bottom: 25px;
+    bottom: 30px;
     right: 25px;
     text-align: right;
   }
