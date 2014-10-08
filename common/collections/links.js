@@ -92,6 +92,10 @@ Schema.Link = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url
   },
+  openGraphId: {
+    type: String,
+    optional: true
+  },
   ownerIds: {
     type: [String],
     optional: true

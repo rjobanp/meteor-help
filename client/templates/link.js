@@ -1,3 +1,15 @@
+Template.link.rendered = function() {
+  var self = this;
+  if ( self.data.openGraphId ) {
+    HTTP.get('https://graph.facebook.com/' + self.data.openGraphId, function(err, res) {
+      if ( res && res.data.image ) {
+        self.$('.link-image')
+          .html('<img src="' + res.data.image[0].url + '">');
+      }
+    });
+  }
+}
+
 Template.linkPage.events({
   'click .claim-owner': function (e,t) {
     e.preventDefault();
