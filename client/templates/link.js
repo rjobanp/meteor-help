@@ -1,21 +1,18 @@
-insertImageForLink = function(self) {
-  if ( self.data.openGraphId ) {
+imageUrls = new ReactiveDict;
+
+var insertImageForLink = function(self) {
+  if ( self.data.openGraphId && !imageUrls.get(self.data._id) ) {
     HTTP.get('https://graph.facebook.com/' + self.data.openGraphId, function(err, res) {
       if ( res && res.data.image ) {
-        self.$('.link-image')
-          .html('<img src="' + res.data.image[0].url + '">');
+        imageUrls.set(self.data._id, res.data.image[0].url);
       }
     });
   }
 }
 
-Template.link.rendered = function() {
-  insertImageForLink(this);
-}
-
-Template.linkPage.rendered = function() {
-  insertImageForLink(this);
-}
+Template.registerHelper('linkImage', function(link) {
+  return link && imageUrls.get(link._id);
+});
 
 Template.linkPage.events({
   'click .claim-owner': function (e,t) {
@@ -24,8 +21,13 @@ Template.linkPage.events({
   }
 });
 
+Template.link.created = function() {
+  insertImageForLink(this);
+}
+
 Template.linkPage.created = function() {
   document.title = this.data.name + ' - ' + 'Meteor Help';
+  insertImageForLink(this);
 }
 
 Template.linkPage.destroyed = function() {
