@@ -4,6 +4,7 @@ RouterSubs = new SubsManager();
 
 Router.configure({
   layoutTemplate: 'layout',
+  loadingTemplate: 'loading',
 
   waitOn: function() {
     return [
@@ -26,6 +27,7 @@ linkListController = RouteController.extend({
     } else {
       Session.set('allLinks.types', null);
     }
+    this.next();
   },
   waitOn: function() {
     var params = {
@@ -41,76 +43,73 @@ linkListController = RouteController.extend({
   }
 });
 
-Router.map(function() {
+Router.route('/', {
+  name: 'home',
+  template: 'home',
+  controller: linkListController
+});
 
-  this.route('home', {
-    path: '/',
-    template: 'home',
-    controller: linkListController
-  });
-
-  this.route('link', {
-    path: '/l/:slug',
-    template: 'linkPage',
-    waitOn: function() {
-      return [
-        RouterSubs.subscribe('linkBySlug', this.params.slug)
-      ]
-    },
-    data: function() {
-      return Links.findOne({slug: this.params.slug})
-    },
-    onBeforeAction: function() {
-      if ( this.ready() ) {
-        RouterSubs.subscribe('linkComments', this.data()._id);
-      }
-
-      Session.set('allLinks.nameRegex', '');
-      $('.search-input').val('');
+Router.route('/l/:slug', {
+  name: 'link',
+  template: 'linkPage',
+  waitOn: function() {
+    return [
+      RouterSubs.subscribe('linkBySlug', this.params.slug)
+    ]
+  },
+  data: function() {
+    return Links.findOne({slug: this.params.slug})
+  },
+  onBeforeAction: function() {
+    if ( this.ready() ) {
+      RouterSubs.subscribe('linkComments', this.data()._id);
+      this.next();
     }
-  });
 
-  this.route('editLink', {
-    path: '/edit/:slug',
-    template: 'editLink',
-    waitOn: function() {
-      return [
-        RouterSubs.subscribe('linkBySlug', this.params.slug)
-      ]
-    },
-    data: function() {
-      return Links.findOne({slug: this.params.slug})
-    },
-    action: function() {
-      if ( !Meteor.user() || !this.data().linkOwner(Meteor.user()) ) {
-        Router.go('home');
-        Alerts.add('Sorry, you can not edit that content');
-      } else {
-        this.render();
-      }
+    Session.set('allLinks.nameRegex', '');
+    $('.search-input').val('');
+  }
+});
+
+Router.route('/edit/:slug', {
+  name: 'editLink',
+  template: 'editLink',
+  waitOn: function() {
+    return [
+      RouterSubs.subscribe('linkBySlug', this.params.slug)
+    ]
+  },
+  data: function() {
+    return Links.findOne({slug: this.params.slug})
+  },
+  action: function() {
+    if ( !Meteor.user() || !this.data().linkOwner(Meteor.user()) ) {
+      Router.go('home');
+      Alerts.add('Sorry, you can not edit that content');
+    } else {
+      this.render();
     }
-  });
+  }
+});
 
-  this.route('newLink', {
-    path: '/new',
-    template: 'newLink',
-    action: function() {
-      if ( !Meteor.user() ) {
-        Router.go('home');
-        Alerts.add('You must be logged in to add new content');
-      } else {
-        this.render();
-      }
-
-      Session.set('allLinks.nameRegex', '');
-      $('.search-input').val('');
+Router.route('/new', {
+  name: 'newLink',
+  template: 'newLink',
+  action: function() {
+    if ( !Meteor.user() ) {
+      Router.go('home');
+      Alerts.add('You must be logged in to add new content');
+    } else {
+      this.render();
     }
-  });
 
-  this.route('type', {
-    path: '/t/:type',
-    template: 'home',
-    controller: linkListController
-  });
+    Session.set('allLinks.nameRegex', '');
+    $('.search-input').val('');
+  }
+});
 
+Router.route('/t/:type', {
+  name: 'type',
+  template: 'home',
+  controller: linkListController
 });

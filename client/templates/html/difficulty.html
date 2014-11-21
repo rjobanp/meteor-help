@@ -11,7 +11,7 @@
 
 <template name="difficultyForm">
   {{#autoForm collection="Rankings" id="newDifficultyForm" type="method" meteormethod="insertRanking"}}
-    {{> afFieldInput name='value' options='allowed'}}
+    {{> afFieldInput name='value' options='allowed' firstOption='Select One'}}
     {{> afFieldInput name='linkId' type='hidden' value=_id}}
     {{> afFieldInput name='type' type='hidden' value='difficulty'}}
     <button type="submit" class="btn btn-primary">Rank Difficulty</button>

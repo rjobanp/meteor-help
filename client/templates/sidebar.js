@@ -12,7 +12,7 @@ Template.registerHelper('sidebar', function() {
 
 Template.sidebar.helpers({
   route: function(routeName) {
-    var path = Router.current().path.split('/');
+    var path = Router.current().originalUrl.split('/');
     return (path[path.length-1] === routeName) ? 'active' : ''
   }
 });

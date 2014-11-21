@@ -15,7 +15,6 @@ aldeed:autoform
 service-configuration
 less
 reactive-var
-mrt:iron-router-progress
 spiderable
 yogiben:admin
 natestrauser:font-awesome
@@ -24,4 +23,5 @@ meteorhacks:subs-manager
 rosh93:fbgraph
 http
 reactive-dict
+multiply:iron-router-progress
 
