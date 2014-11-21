@@ -27,7 +27,7 @@ Template.home.helpers({
     return Links.find(findQuery, findOptions);
   },
   showHomeMessage: function() {
-    return Router.current().route.name === 'home' && Session.get('showHomeMessage');
+    return Router.current().route.getName() === 'home' && Session.get('showHomeMessage');
   }
 });
 
