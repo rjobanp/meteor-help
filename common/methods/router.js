@@ -15,27 +15,38 @@ Router.configure({
   },
 
   onAfterAction: function() {
-    ga('send', 'pageview');
-    Session.set('sidebar', false);
+    if (Meteor.isClient) {
+      ga('send', 'pageview');
+      Session.set('sidebar', false);
+    }
   }
 });
 
 linkListController = RouteController.extend({
   onBeforeAction: function () {
-    if ( this.params && this.params.type ) {
-      Session.set('allLinks.types', [this.params.type]);
-    } else {
-      Session.set('allLinks.types', null);
+    if (Meteor.isClient) {
+      if ( this.params && this.params.type ) {
+        Session.set('allLinks.types', [this.params.type]);
+      } else {
+        Session.set('allLinks.types', null);
+      }
     }
     this.next();
   },
   waitOn: function() {
-    var params = {
-      sort: Session.get('allLinks.sort'),
-      limit: Session.get('allLinks.limit'),
-      skip: Session.get('allLinks.skip'),
-      types: Session.get('allLinks.types'),
-      nameRegex: Session.get('allLinks.nameRegex')
+    if (Meteor.isClient) {
+      var params = {
+        sort: Session.get('allLinks.sort'),
+        limit: Session.get('allLinks.limit'),
+        skip: Session.get('allLinks.skip'),
+        types: Session.get('allLinks.types'),
+        nameRegex: Session.get('allLinks.nameRegex')
+      }
+    } else {
+      var params = {
+        sort: [["rating.average", "desc"]],
+        limit: 100
+      }
     }
     return [
       RouterSubs.subscribe('allLinks', params)
@@ -46,12 +57,14 @@ linkListController = RouteController.extend({
 Router.route('/', {
   name: 'home',
   template: 'home',
+  fastRender: true,
   controller: linkListController
 });
 
 Router.route('/l/:slug', {
   name: 'link',
   template: 'linkPage',
+  fastRender: true,
   waitOn: function() {
     return [
       RouterSubs.subscribe('linkBySlug', this.params.slug)
@@ -65,9 +78,10 @@ Router.route('/l/:slug', {
       RouterSubs.subscribe('linkComments', this.data()._id);
       this.next();
     }
-
-    Session.set('allLinks.nameRegex', '');
-    $('.search-input').val('');
+    if (Meteor.isClient) {
+      Session.set('allLinks.nameRegex', '');
+      $('.search-input').val('');
+    }
   }
 });
 
@@ -85,7 +99,9 @@ Router.route('/edit/:slug', {
   action: function() {
     if ( !Meteor.user() || !this.data().linkOwner(Meteor.user()) ) {
       Router.go('home');
-      Alerts.add('Sorry, you can not edit that content');
+      if (Meteor.isClient) {
+        Alerts.add('Sorry, you can not edit that content');
+      }
     } else {
       this.render();
     }
@@ -98,18 +114,22 @@ Router.route('/new', {
   action: function() {
     if ( !Meteor.user() ) {
       Router.go('home');
-      Alerts.add('You must be logged in to add new content');
+      if (Meteor.isClient) {
+        Alerts.add('You must be logged in to add new content');
+      }
     } else {
       this.render();
     }
-
-    Session.set('allLinks.nameRegex', '');
-    $('.search-input').val('');
+    if(Meteor.isClient) {
+      Session.set('allLinks.nameRegex', '');
+      $('.search-input').val('');
+    }
   }
 });
 
 Router.route('/t/:type', {
   name: 'type',
   template: 'home',
+  fastRender: true,
   controller: linkListController
 });
